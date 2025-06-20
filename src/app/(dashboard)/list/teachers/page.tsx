@@ -46,7 +46,7 @@ const columns = [
   {
     header:"Adress",
      accessor:"adress",
-      className:"hidden, lg:table-cell "
+      className:"hidden lg:table-cell "
   },
   {
     header:"Actions",

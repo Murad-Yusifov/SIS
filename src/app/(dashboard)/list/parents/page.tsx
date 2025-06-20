@@ -53,7 +53,7 @@ const ParentListPage = () => {
       </td>
       <td className="hidden md:table-cell">{item.students.join(",")}</td>
       <td className="hidden md:table-cell">{item.phone}</td>
-      <td className="hidden md:table-cell">{item.adress}</td>
+      <td className="hidden md:table-cell">{item.address}</td>
       <td>
         <div className="flex items-center gap-2">
           <Link href={`/list/teachers/${item.id}`} >

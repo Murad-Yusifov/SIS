@@ -3,7 +3,7 @@ const Table = ({
     renderRow,
     data
 }:{columns:{header:string,accessor:string, className?:string}[];
-renderRow:(item:any) =>React.ReactNode;
+renderRow:(item:{id:number,name:string,student:string[],email?:string,phone:number,address:string}) =>React.ReactNode;
 data:undefined[]
 }) => {
   return (

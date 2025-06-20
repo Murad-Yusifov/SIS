@@ -11,7 +11,7 @@ type Parent = {
   students:string[],
   phone?:string,
   email?:string,
-  adress:string,
+  address:string,
 
 }
 

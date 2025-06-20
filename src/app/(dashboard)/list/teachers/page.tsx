@@ -14,7 +14,7 @@ type Teacher = {
   phone:string,
   subjects:string[],
   classes:string[],
-  adress:string,
+  address:string,
 
 }
 

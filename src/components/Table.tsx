@@ -1,18 +1,4 @@
-
-export type TableItem ={
- Teacher:string,
- Student:string,
- Parent:string,
- Subject:string,
- Class:string,
- Lesson:string,
- Exam:string,
- Assignment:string,
- Result:string,
- Event:string,
- Announcement:string,
-}
-
+import { TableItem } from "@/lib/data";
 
 const Table = ({
     columns,
@@ -20,7 +6,7 @@ const Table = ({
     data
 }:{columns:{header:string,accessor:string, className?:string}[];
 renderRow:(item:TableItem) =>React.ReactNode;
-data:TableItem[]
+data:TableItem[];
 
 }) => {
   return (

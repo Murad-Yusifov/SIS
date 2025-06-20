@@ -915,6 +915,111 @@ export const announcementsData = [
   },
 ];
 
+// data typechecking for ercel
+
+export type TableItem =
+  | {
+  id: number;
+  title: string;
+  class: string;
+  date:string;
+  startTime:string;
+  endTime:string;
+}
+  | {
+  id: number;
+  title: string;
+  class: string;
+  date:string;
+}
+  | {
+  id: number;
+  subject: string;
+  class: number;
+  teacher: number;
+  dueDate: number;
+}
+  | {
+  id: number;
+  name: string;
+  capacity: number;
+  grade: number;
+  supervisor: string;
+}
+  | {
+  id: number;
+  title: string;
+  class: string;
+  date:string;
+  startTime:string;
+  endTime:string;
+}
+  | {
+  id: number;
+  subject: string;
+  class: number;
+  teacher: number;
+  date: number;
+}
+  | {
+  id: number;
+  subject: string;
+  class: number;
+  teacher: number;
+}
+  | {
+  id:number,
+  name:string,
+  students:string[],
+  phone?:string,
+  email?:string,
+  address:string,
+
+}
+  | {
+  id: number;
+  subject: string;
+  class: string;
+  teacher:string;
+  student: number;
+  type: "exam" | "assignment";
+  date:string;
+  score:number
+}
+  | {
+  id:number,
+  studentId:string,
+  name:string,
+  email?:string,
+  photo:string,
+  phone?:string,
+  grade:number,
+  class:string,
+  adress:string,
+
+}
+
+  | {
+  id:number,
+  name:string,
+  teachers:string[],
+
+}
+  | {
+  id:number,
+  teacherId:string,
+  name:string,
+  email?:string,
+  photo:string,
+  phone:string,
+  subjects:string[],
+  classes:string[],
+  address:string,
+
+}
+
+
+
 
 // YOU SHOULD CHANGE THE DATES OF THE EVENTS TO THE CURRENT DATE TO SEE THE EVENTS ON THE CALENDAR
 export const calendarEvents = [

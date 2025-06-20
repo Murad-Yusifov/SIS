@@ -4,7 +4,8 @@ const Table = ({
     data
 }:{columns:{header:string,accessor:string, className?:string}[];
 renderRow:(item:{ id:number,  name:string,  students:string[],  phone?:string,  email?:string,  adress:string,}) =>React.ReactNode;
-data:{ id:number,  name:string,  students:string[],  phone?:string,  email?:string,  adress:string,}[]
+data:{ id:number,  name:string,  students:string[],  phone?:string  | undefined,  email?:string | undefined,  adress:string,}[]
+
 }) => {
   return (
     <table className='w-full mt-4 '>

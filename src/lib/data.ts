@@ -935,9 +935,9 @@ export type TableItem =
   | {
   id: number;
   subject: string;
-  class: number;
-  teacher: number;
-  dueDate: number;
+  class?: number;
+  teacher?: number;
+  dueDate?: number;
 }
   | {
   id: number;

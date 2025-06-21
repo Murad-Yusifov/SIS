@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       { hostname: "images.pexels.com" },
       { hostname: "upload.wikimedia.org" },
+      { hostname: "en.wikipedia.org" },
     ],
   },
 };

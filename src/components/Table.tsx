@@ -6,7 +6,7 @@ const Table = ({
     data
 }:{columns:{header:string,accessor:string, className?:string}[];
 renderRow:(item:TableItem) =>React.ReactNode;
-data:TableItem[];
+data:any[];
 
 }) => {
   return (

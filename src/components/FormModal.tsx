@@ -1,7 +1,7 @@
 "use client";
-
 import Image from "next/image";
 import { useState } from "react";
+import TeacherForm from "./forms/TeacherForm";
 
 const FormModal = ({
   table,
@@ -40,10 +40,10 @@ const FormModal = ({
     return type === "delete" && id ? (
       <form action="" className="p-4 flex flex-col gap-4">
         <span className="text-center font-medium">All data will be lost. Are you sure to want to delete this item {table}?</span>
-        <button className="bg-red-700 text-white py-2 px-4 rounded-none">Delete</button>
+        <button className="bg-red-700 text-white py-2 px-4 rounded-none w-max self-center">Delete</button>
       </form>
     ) : (
-      "create or update form"
+      <TeacherForm type="update" data={data}  />
     );
   };
 
@@ -58,7 +58,7 @@ const FormModal = ({
 
       {open && (
         <div
-          className="w-screen h-screen absolute left-0 top-0 bg-black z-50 flex justify-center items-center"
+          className="h-[1200px] sm: w-screen md:h-[650px] absolute left-0 top-0 bg-black z-50 flex justify-center items-center"
           style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
         >
           <div className="bg-white rounded-md p-4 relative w-[90%] md:W-[70%]  lg:w-[60%] xl:w-[50%] xxl:w-[40%]">

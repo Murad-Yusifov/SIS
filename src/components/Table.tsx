@@ -5,7 +5,7 @@ const Table = ({
     renderRow,
     data
 }:{columns:{header:string,accessor:string, className?:string}[];
-renderRow:(item:TableItem) =>React.ReactNode;
+renderRow:(item:any) =>React.ReactNode;
 data:any[];
 
 }) => {

@@ -73,7 +73,7 @@ const AnnouncementListPage = () => {
               <Image src="/sort.png" alt="" width={14} height={14} />
             </button>
             {role === "admin" && (
-             <FormModal  table="announcement" type="delete" />
+             <FormModal  table="announcement" type="create" />
               
             )}
           </div>

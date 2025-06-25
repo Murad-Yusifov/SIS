@@ -124,3 +124,11 @@ enum Day {
   THURSDAY
   FRIDAY
 }
+
+enum Day2 {
+  MONDAY
+  TUESDAY
+  WEDNESDAY
+  THURSDAY
+  FRIDAY
+}

@@ -1,23 +1,36 @@
 "use client";
 import dynamic from "next/dynamic";
 import Image from "next/image";
-import { JSX, useState } from "react";
+import { Dispatch, JSX, SetStateAction, useState } from "react";
   // import TeacherForm from "./forms/TeacherForm";
   // import StudentForm from "./forms/StudentForm";
+  // import ClassForm from "./forms/ClassForm";
 
-  const TeacherForm = dynamic(()=>import("./forms/TeacherForm"),{
-    loading:() => <h1>loading...</h1>
-  })
-    const StudentForm = dynamic(()=>import("./forms/StudentForm"),{
-    loading:()=> <h1>loading...</h1>
-  })
+ const TeacherForm = dynamic(() => import("./forms/TeacherForm"), {
+  loading: () => <h1>Loading...</h1>,
+});
+const StudentForm = dynamic(() => import("./forms/StudentForm"), {
+  loading: () => <h1>Loading...</h1>,
+});
+// const SubjectForm = dynamic(() => import("./forms/SubjectForm"), {
+//   loading: () => <h1>Loading...</h1>,
+// });
+// const ClassForm = dynamic(() => import("./forms/ClassForm"), {
+//   loading: () => <h1>Loading...</h1>,
+// });
+// const ExamForm = dynamic(() => import("./forms/ExamForm"), {
+//   loading: () => <h1>Loading...</h1>,
+// });
 
 
-
-const forms:{[key:string]:(type:"create" | "update", data?:any)=>JSX.Element}=
+const forms:{[key:string]:(setOpen: Dispatch<SetStateAction<Boolean>>, type:"create" | "update", data?:any, relatedData?:any,)=>JSX.Element}=
 {
-  teacher:(type,data)=><TeacherForm type={type} data={data}/>,
-  student:(type,data)=><StudentForm type={type} data={data}/>
+  // class:(setOpen, type, data, relatedData)=><ClassForm type={type} data={data}/>,
+  teacher:(setOpen, type, data, relatedData)=><TeacherForm type={type} data={data}/>,
+  student:(setOpen, type, data, relatedData)=><StudentForm type={type} data={data}/>,
+  exam:(setOpen, type, data, relatedData)=><StudentForm type={type} data={data}/>,
+  subject:(setOpen, type, data, relatedData)=><StudentForm type={type} data={data}/>,
+
 }
 
 const FormModal = ({
@@ -60,7 +73,7 @@ const FormModal = ({
         <button className="bg-red-700 text-white py-2 px-4 rounded-none w-max self-center">Delete</button>
       </form>
     ) :type==="create" || type ==="update"? (
-      forms[table](type,data)
+       forms[table](setOpen, type, data)
     ):("Form not found")
   };
 

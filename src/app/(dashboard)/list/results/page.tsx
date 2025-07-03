@@ -19,18 +19,17 @@ import Image from "next/image";
 //   score:number
 // };
 
-type ResultList ={
-  id:number;
-      title:string;
-      studentName:string;
-      studentSurname:string;
-      teacherName:string;
-      teacherSurName:string;
-      score:number;
-      className:string;
-      startTime:Date;
-
-}
+type ResultList = {
+  id: number;
+  title: string;
+  studentName: string;
+  studentSurname: string;
+  teacherName: string;
+  teacherSurName: string;
+  score: number;
+  className: string;
+  startTime: Date;
+};
 
 const columns = [
   {
@@ -45,7 +44,6 @@ const columns = [
     header: "Score",
     accessor: "score",
     className: "hidden md:table-cell ",
-
   },
   {
     header: "Teacher",
@@ -53,8 +51,8 @@ const columns = [
     className: "hidden md:table-cell ",
   },
   {
-    header:"Class",
-    accessor:"class",
+    header: "Class",
+    accessor: "class",
     className: "hidden md:table-cell ",
   },
   {
@@ -76,16 +74,19 @@ const renderRow = (item: ResultList) => (
     <td className="flex item-center gap-4 p-4">{item.title}</td>
     <td>{item.studentName + " " + item.studentSurname}</td>
     <td className="hidden md:table-cell">{item.score}</td>
-    <td className="hidden md:table-cell">{item.teacherName + " " + item.teacherSurName}</td>
+    <td className="hidden md:table-cell">
+      {item.teacherName + " " + item.teacherSurName}
+    </td>
     <td className="hidden md:table-cell">{item.className}</td>
-    <td className="hidden md:table-cell">{new Intl.DateTimeFormat("en-US").format(item.startTime)}</td>
+    <td className="hidden md:table-cell">
+      {new Intl.DateTimeFormat("en-US").format(item.startTime)}
+    </td>
     <td>
       <div className="flex items-center gap-2">
         {role === "admin" && (
           <>
-           <FormModal  table="result" type="update" data={item} />
-           <FormModal  table="result" type="delete" id={item.id} />
-
+            <FormModal table="result" type="update" data={item} />
+            <FormModal table="result" type="delete" id={item.id} />
           </>
         )}
       </div>
@@ -109,18 +110,18 @@ const ResultListPage = async ({
     for (const [key, value] of Object.entries(queryParams)) {
       if (value !== undefined) {
         switch (key) {
-          case "classId":
-            query.lesson = { classId: parseInt(value) };
-            break;
-          case "teacherId":
-            query.lesson = { teacherId: value };
+          case "studentId":
+            query.studentId = value;
             break;
           case "search":
-            query.OR ={
-              
-            }
-                
+            query.OR = [
+              { exam: { title: { contains: value, mode: "insensitive" } } },
+              { student: {name: { contains: value, mode: "insensitive" }} },
+              // { teacher: {name: { contains: value, mode: "insensitive" }} },
+            ];
             break;
+            default:
+              break
         }
       }
     }
@@ -128,31 +129,29 @@ const ResultListPage = async ({
 
   const [dataRes, count] = await prisma.$transaction([
     prisma.result.findMany({
-      // where: query,
+      where: query,
       include: {
-        student:{select:{name:true, surname:true}},
-        exam:{
-          include:{
-            lesson:{
-              select:{
-                class:{select:{name:true}},
-                teacher:{select:{name:true, surname:true}},
-
-              }
-            }
-          }
+        student: { select: { name: true, surname: true } },
+        exam: {
+          include: {
+            lesson: {
+              select: {
+                class: { select: { name: true } },
+                teacher: { select: { name: true, surname: true } },
+              },
+            },
+          },
         },
-        assignment:{
-          include:{
-            lesson:{
-              select:{
-                class:{select:{name:true}},
-                teacher:{select:{name:true, surname:true}},
-
-              }
-            }
-          }
-        }
+        assignment: {
+          include: {
+            lesson: {
+              select: {
+                class: { select: { name: true } },
+                teacher: { select: { name: true, surname: true } },
+              },
+            },
+          },
+        },
       },
       take: ITEM_PER_PAGE,
       skip: ITEM_PER_PAGE * (p - 1),
@@ -160,25 +159,25 @@ const ResultListPage = async ({
     prisma.result.count({ where: query }),
   ]);
 
-  const data = dataRes.map(item=>{
-    const assesment = item.exam || item.assignment
+  const data = dataRes.map((item) => {
+    const assesment = item.exam || item.assignment;
 
-    if(!assesment) return null;
+    if (!assesment) return null;
 
-    const isExam = "startTime" in assesment
+    const isExam = "startTime" in assesment;
 
     return {
-      id:item.id,
-      title:assesment.title,
-      studentName:item.student.name,
-      studentSurname:item.student.surname,
-      teacherName:assesment.lesson.teacher.name,
-      teacherSurName:assesment.lesson.teacher.surname,
-      score:item.score,
-      className:assesment.lesson.class.name,
-      startTime: isExam? assesment.startTime:assesment.startDate
-    }
-  })
+      id: item.id,
+      title: assesment.title,
+      studentName: item.student.name,
+      studentSurname: item.student.surname,
+      teacherName: assesment.lesson.teacher.name,
+      teacherSurName: assesment.lesson.teacher.surname,
+      score: item.score,
+      className: assesment.lesson.class.name,
+      startTime: isExam ? assesment.startTime : assesment.startDate,
+    };
+  });
 
   return (
     <div
@@ -197,10 +196,7 @@ const ResultListPage = async ({
             <button className="w-8 h-8 flex items-center justify-center rounded-full bg-[#FAE27C]">
               <Image src="/sort.png" alt="" width={14} height={14} />
             </button>
-            {role === "admin" && (
-             <FormModal  table="result" type="create" />
-
-            )}
+            {role === "admin" && <FormModal table="result" type="create" />}
           </div>
         </div>
       </div>
@@ -208,7 +204,7 @@ const ResultListPage = async ({
       <Table columns={columns} renderRow={renderRow} data={data} />
 
       {/* Pagination */}
-      <Pagination page={p} count={count}/>
+      <Pagination page={p} count={count} />
     </div>
   );
 };

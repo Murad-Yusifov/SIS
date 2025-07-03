@@ -97,6 +97,8 @@ const ExamListPage = async ({
               }
             }
             break;
+            default:
+              break
         }
       }
     }

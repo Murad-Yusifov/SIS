@@ -90,6 +90,8 @@ const LessonListPage = async ({
               { teacher: { name: { contains: value, mode: "insensitive" } } },
             ];
             break;
+            default:
+              break
         }
       }
     }

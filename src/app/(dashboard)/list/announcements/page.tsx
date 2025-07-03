@@ -32,13 +32,13 @@ const columns = [
     accessor: "date",
     className: "hidden md:table-cell ",
   },
-   ...(role === "admin"? []: [
+  ...(role === "admin"? [
           {
             header: "Actions",
             accessor: "action",
           },
-        ]
-      ),
+        ]:[]
+      ) ,
 ];
 
 const renderRow = (item: AnnouncementList) => (

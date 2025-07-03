@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import InputField from "../InputField";
 import Image from "next/image";
+import { RelatedData } from "@/lib/types";
 
 const schema = z.object({
   username: z
@@ -31,7 +32,7 @@ const StudentForm = ({
   data,
 }: {
   type: "create" | "update";
-  data?: any;
+  data?: RelatedData;
 }) => {
   const {
     register,

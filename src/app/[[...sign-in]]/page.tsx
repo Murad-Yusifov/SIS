@@ -8,7 +8,11 @@ import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
 const LoginPage = () => {
-      const { isSignedIn, user, isLoaded } = useUser()
+
+  // vercel uchun isSignedIn, isLoaded anlashilsin deye chiratdim sonra elave edecem
+      const { user } = useUser()
+
+      
 
       const router = useRouter()
 

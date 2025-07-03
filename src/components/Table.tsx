@@ -1,4 +1,4 @@
-import { TableItem } from "@/lib/data";
+// import { TableItem } from "@/lib/data";
 
 const Table = ({
     columns,

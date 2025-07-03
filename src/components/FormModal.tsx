@@ -1,4 +1,5 @@
 "use client";
+import { RelatedData } from "@/lib/types";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { Dispatch, JSX, SetStateAction, useState } from "react";
@@ -23,13 +24,13 @@ const StudentForm = dynamic(() => import("./forms/StudentForm"), {
 // });
 
 
-const forms:{[key:string]:(setOpen: Dispatch<SetStateAction<Boolean>>, type:"create" | "update", data?:any, relatedData?:any,)=>JSX.Element}=
+const forms:{[key:string]:(setOpen: Dispatch<SetStateAction<boolean>>, type:"create" | "update", data?:FormData, relatedData?:RelatedData,)=>JSX.Element}=
 {
   // class:(setOpen, type, data, relatedData)=><ClassForm type={type} data={data}/>,
-  teacher:(setOpen, type, data, relatedData)=><TeacherForm type={type} data={data}/>,
-  student:(setOpen, type, data, relatedData)=><StudentForm type={type} data={data}/>,
-  exam:(setOpen, type, data, relatedData)=><StudentForm type={type} data={data}/>,
-  subject:(setOpen, type, data, relatedData)=><StudentForm type={type} data={data}/>,
+  teacher:(setOpen, type, data)=><TeacherForm type={type} data={data}/>,
+  student:(setOpen, type, data)=><StudentForm type={type} data={data}/>,
+  exam:(setOpen, type, data)=><StudentForm type={type} data={data}/>,
+  subject:(setOpen, type, data)=><StudentForm type={type} data={data}/>,
 
 }
 
@@ -53,7 +54,7 @@ const FormModal = ({
     | "event"
     | "announcement";
   type: "create" | "update" | "delete";
-  data?: any;
+  data?: FormData;
   id?: number | string;
 }) => {
   const size = type === "create" ? "w-8 h-8" : "w-7 h-7";

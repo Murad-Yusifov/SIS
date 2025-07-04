@@ -37,10 +37,10 @@ const columns = [
     accessor: "supervisor",
     className: "hidden md:table-cell ",
   },
-  {
+...(role==="admin"? [ {
     header: "Actions",
     accessor: "action",
-  },
+  },]:[])
 ];
 
 const renderRow = (item: ClassList) => (

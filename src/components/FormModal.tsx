@@ -7,6 +7,7 @@ import { Dispatch, JSX, SetStateAction, useState } from "react";
   // import StudentForm from "./forms/StudentForm";
   // import ClassForm from "./forms/ClassForm";
 
+
  const TeacherForm = dynamic(() => import("./forms/TeacherForm"), {
   loading: () => <h1>Loading...</h1>,
 });
@@ -29,8 +30,8 @@ const forms:{[key:string]:(setOpen: Dispatch<SetStateAction<boolean>>, type:"cre
   // class:(setOpen, type, data, relatedData)=><ClassForm type={type} data={data}/>,
   teacher:(setOpen, type, data)=><TeacherForm type={type} data={data}/>,
   student:(setOpen, type, data)=><StudentForm type={type} data={data}/>,
-  exam:(setOpen, type, data)=><StudentForm type={type} data={data}/>,
-  subject:(setOpen, type, data)=><StudentForm type={type} data={data}/>,
+  // exam:(setOpen, type, data)=><ClassForm type={type} data={data}/>,
+  // subject:(setOpen, type, data)=><StudentForm type={type} data={data}/>,
 
 }
 
@@ -54,7 +55,7 @@ const FormModal = ({
     | "event"
     | "announcement";
   type: "create" | "update" | "delete";
-  data?: FormData;
+  data?: any;
   id?: number | string;
 }) => {
   const size = type === "create" ? "w-8 h-8" : "w-7 h-7";

@@ -1,9 +1,9 @@
-import { FieldError } from "react-hook-form";
+import { FieldError, FieldValues, UseFormRegister } from "react-hook-form";
 
-type InputTypeProps ={
+type InputTypeProps<T extends FieldValues> ={
      label:string;
     type?:string;
-    register:any;
+    register:UseFormRegister<T>;
     name:string;
     defaultValue?:string;
     error?:FieldError;

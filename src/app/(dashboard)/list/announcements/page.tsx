@@ -63,13 +63,13 @@ const renderRow = (item: AnnouncementList) => (
   </tr>
 );
 const AnnouncementListPage = async ({
-  searchParams,
+   searchParams,
 }: {
-  searchParams: { [key: string]: string } | undefined;
+  searchParams?: Record<string, string | string[]>;
 }) => {
   const { page, ...queryParams } = searchParams;
 
-  const p = page ? parseInt(page) : 1;
+  const p = typeof searchParams?.page ==="string"? parseInt(searchParams.page) : 1;
 
   // URL PARAMS CONDITION
 

@@ -9,9 +9,6 @@ const nextConfig: NextConfig = {
       { hostname: "en.wikipedia.org" },
     ],
   },
-  typescript: {
-    ignoreBuildErrors: true, // <-- bunu əlavə etdik
-  },
     eslint: {
     ignoreDuringBuilds: true, // <-- bunu əlavə edirik
   },

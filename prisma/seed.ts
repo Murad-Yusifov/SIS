@@ -176,6 +176,8 @@ async function main() {
     });
   }
 
+
+
   // EVENT
   for (let i = 1; i <= 5; i++) {
     await prisma.event.create({

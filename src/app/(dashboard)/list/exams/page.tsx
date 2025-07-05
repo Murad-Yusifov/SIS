@@ -108,6 +108,7 @@ const ExamListPage = async ({
   }
 
   // Role COndditions
+
   switch (role) {
     case "admin":      
       break;
@@ -118,22 +119,20 @@ const ExamListPage = async ({
           query.lesson.class= {
           students:{
             some:{
-              id:currentUserId
+              id:currentUserId!,
             }
           }
         }       
         break
         case "parent":
-           query.lesson.class={
+          query.lesson.class={
             students:{
               some:{
-                parentId:currentUserId!
+                parentId:currentUserId!,
               }
             }
-
-           }
-        
-        break
+          }
+          break
     default:
       break;
   }
@@ -173,7 +172,7 @@ const ExamListPage = async ({
             <button className="w-8 h-8 flex items-center justify-center rounded-full bg-[#FAE27C]">
               <Image src="/sort.png" alt="" width={14} height={14} />
             </button>
-            {role === "admin" && <FormModal table="lesson" type="create" />}
+            {(role === "admin" ||  role==="teacher") &&<FormModal table="exam" type="create" />}
           </div>
         </div>
       </div>

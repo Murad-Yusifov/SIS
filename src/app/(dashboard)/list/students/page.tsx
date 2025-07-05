@@ -49,10 +49,10 @@ const columns = [
     accessor: "adress",
     className: "hidden lg:table-cell ",
   },
-  {
+...(role==="admin"?[  {
     header: "Actions",
     accessor: "action",
-  },
+  },]:[])
 ];
 const renderRow = (item: StudentList) => (
   <tr

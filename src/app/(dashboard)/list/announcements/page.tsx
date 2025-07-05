@@ -63,33 +63,29 @@ const renderRow = (item: AnnouncementList) => (
   </tr>
 );
 const AnnouncementListPage = async ({
-   searchParams,
+  searchParams,
 }: {
-  searchParams?: Record<string, string | string[]>;
+  searchParams: { [key: string]: string } | undefined;
 }) => {
   const { page, ...queryParams } = searchParams;
 
-  const p = typeof searchParams?.page ==="string"? parseInt(searchParams.page) : 1;
+  const p = page ? parseInt(page) : 1;
 
   // URL PARAMS CONDITION
 
   const query: Prisma.AnnouncementWhereInput = {};
 
-if (queryParams) {
-  for (const [key, value] of Object.entries(queryParams)) {
-    if (value !== undefined) {
-      switch (key) {
-        case "search": {
-          // value string | string[] ola bilər, biz string əldə edirik:
-          const searchValue = Array.isArray(value) ? value[0] : value;
-          query.title = { contains: searchValue, mode: "insensitive" };
-          break;
+  if (queryParams) {
+    for (const [key, value] of Object.entries(queryParams)) {
+      if (value !== undefined) {
+        switch (key) {
+          case "search": {
+            query.title = { contains: value, mode: "insensitive" };
+          }
         }
       }
     }
   }
-}
-
 
   // ROLE CONDDITIONS
   
